@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>适老化智能家庭健康监测仪 | 雏雁计划</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+          rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#f0fdfa', // Very light teal (background)
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            500: '#14b8a6', // Primary Brand Color
+                            600: '#0d9488', // Hover state
+                            700: '#0f766e',
+                            800: '#115e59',
+                        },
+                        healing: {
+                            50: '#fafaf9', // Warm white
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'flow': 'flow 2s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': {transform: 'translateY(0)'},
+                            '50%': {transform: 'translateY(-10px)'},
+                        },
+                        flow: {
+                            '0%': {strokeDashoffset: '24'},
+                            '100%': {strokeDashoffset: '0'},
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Glassmorphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #0d9488, #2dd4bf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-healing-50 text-gray-700 antialiased selection:bg-medical-200 selection:text-medical-800">
+
+<!-- Navbar -->
+<nav class="fixed w-full z-50 glass shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-medical-400 to-medical-600 rounded-xl flex items-center justify-center text-white shadow-lg">
+                    <i class="fa-solid fa-heart-pulse text-xl"></i>
+                </div>
+                <span class="font-bold text-xl tracking-tight text-gray-800">智守护 <span
+                        class="text-sm font-normal text-medical-600 ml-1">适老化健康监测</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-600 hover:text-medical-600 font-medium transition">首页</a>
+                <a href="#visualization"
+                   class="text-gray-600 hover:text-medical-600 font-medium transition">智能演示</a>
+                <a href="#features" class="text-gray-600 hover:text-medical-600 font-medium transition">核心功能</a>
+                <a href="#team" class="text-gray-600 hover:text-medical-600 font-medium transition">团队成员</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-gray-600 hover:text-medical-600">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-medical-200 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-40"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <div class="inline-flex items-center px-4 py-2 rounded-full bg-medical-50 text-medical-700 text-sm font-medium mb-6 border border-medical-100">
+                <span class="w-2 h-2 bg-medical-500 rounded-full mr-2 animate-pulse"></span>
+                北京邮电大学 · 雏雁计划立项项目
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                数据-知识-思维一体化<br>
+                <span class="gradient-text">适老化智能家庭健康监测仪</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+                不仅是监测，更是您的私人健康顾问。结合AI深度解读与批判性思维引导，赋能银发族主动管理健康，远离健康谣言。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#visualization"
+                   class="px-8 py-4 bg-medical-600 text-white rounded-full font-semibold shadow-lg shadow-medical-500/30 hover:bg-medical-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-play"></i> 观看智能演示
+                </a>
+                <a href="#about"
+                   class="px-8 py-4 bg-white text-medical-700 border border-medical-200 rounded-full font-semibold hover:bg-medical-50 hover:border-medical-300 transition-all duration-300">
+                    了解项目详情
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Visualization Section (The Core Request) -->
+<section id="visualization" class="py-20 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">全链路智能健康守护</h2>
+            <p class="text-lg text-gray-600">从生理数据采集到AI深度推理，可视化呈现我们的工作原理</p>
+        </div>
+
+        <!-- Dashboard Container -->
+        <div class="bg-gray-50 rounded-3xl shadow-2xl border border-gray-100 overflow-hidden relative">
+
+            <!-- Visualization Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 lg:gap-8 p-8 lg:p-12 relative z-10">
+
+                <!-- Step 1: Data Collection (Left) -->
+                <div class="flex flex-col justify-center gap-6 relative group">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-blue-50 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 flex items-center gap-2 z-10">
+                        <span class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm">1</span>
+                        多模态数据采集
+                    </h3>
+
+                    <!-- Sensor Cards -->
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between z-10 animate-float"
+                         style="animation-delay: 0s;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center">
+                                <i class="fa-solid fa-heart-pulse text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">实时心率 (PPG)</p>
+                                <p class="font-mono font-bold text-xl text-gray-800" id="heart-rate">75 <span
+                                        class="text-xs font-normal text-gray-400">BPM</span></p>
+                            </div>
+                        </div>
+                        <div class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between z-10 animate-float"
+                         style="animation-delay: 1s;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
+                                <i class="fa-solid fa-temperature-half text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">体温监测 (IR)</p>
+                                <p class="font-mono font-bold text-xl text-gray-800" id="temperature">36.6 <span
+                                        class="text-xs font-normal text-gray-400">°C</span></p>
+                            </div>
+                        </div>
+                        <div class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between z-10 animate-float"
+                         style="animation-delay: 2s;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-500 flex items-center justify-center">
+                                <i class="fa-solid fa-bed text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">睡眠质量 (ACC)</p>
+                                <p class="font-mono font-bold text-xl text-gray-800">监测中...</p>
+                            </div>
+                        </div>
+                        <div class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                    </div>
+                </div>
+
+                <!-- Step 2: AI Processing (Center) -->
+                <div class="flex flex-col items-center justify-center py-8 lg:py-0 relative">
+                    <!-- Connection Lines (Hidden on mobile, visible lg) -->
+                    <div class="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 w-full h-20 overflow-hidden pointer-events-none z-0">
+                        <svg class="w-full h-full" preserveAspectRatio="none">
+                            <line x1="0" y1="50%" x2="50%" y2="50%" stroke="#cbd5e1" stroke-width="2"
+                                  stroke-dasharray="6 4" class="animate-flow"/>
+                            <line x1="50%" y1="50%" x2="100%" y2="50%" stroke="#cbd5e1" stroke-width="2"
+                                  stroke-dasharray="6 4" class="animate-flow"/>
+                        </svg>
+                    </div>
+
+                    <div class="relative z-10 text-center">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center justify-center gap-2">
+                            <span class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-sm">2</span>
+                            AI 融合推理
+                        </h3>
+
+                        <!-- The Brain Animation -->
+                        <div class="relative w-40 h-40 mx-auto flex items-center justify-center">
+                            <div class="absolute inset-0 bg-medical-500 rounded-full opacity-10 animate-ping"></div>
+                            <div class="absolute inset-4 bg-medical-500 rounded-full opacity-20 animate-pulse"></div>
+                            <div class="w-32 h-32 bg-white rounded-full shadow-lg border-2 border-medical-100 flex items-center justify-center relative z-10">
+                                <i class="fa-solid fa-brain text-4xl text-medical-600"></i>
+                            </div>
+                            <!-- Orbiting Elements -->
+                            <div class="absolute inset-0 w-full h-full animate-[spin_8s_linear_infinite]">
+                                <div class="absolute top-0 left-1/2 -translate-x-1/2 -mt-2 bg-white p-1.5 rounded-full shadow-md">
+                                    <i class="fa-solid fa-book-medical text-yellow-500 text-sm"></i>
+                                </div>
+                                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 -mb-2 bg-white p-1.5 rounded-full shadow-md">
+                                    <i class="fa-solid fa-history text-blue-500 text-sm"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 space-y-2">
+                            <div class="bg-white/80 backdrop-blur px-4 py-2 rounded-lg text-sm text-gray-600 shadow-sm border border-gray-100 inline-block">
+                                <i class="fa-solid fa-database text-medical-500 mr-2"></i>检索知识图谱
+                            </div>
+                            <br>
+                            <div class="bg-white/80 backdrop-blur px-4 py-2 rounded-lg text-sm text-gray-600 shadow-sm border border-gray-100 inline-block">
+                                <i class="fa-solid fa-user-clock text-medical-500 mr-2"></i>对比历史病例
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Output & Thinking (Right) -->
+                <div class="flex flex-col justify-center relative group">
+                    <div class="absolute -inset-4 bg-gradient-to-l from-green-50 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 flex items-center gap-2 z-10">
+                        <span class="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm">3</span>
+                        智能报告 & 思维引导
+                    </h3>
+
+                    <!-- Phone Mockup/Card -->
+                    <div class="bg-white rounded-2xl shadow-lg border border-medical-100 overflow-hidden z-10 transform transition hover:scale-[1.02] duration-300">
+                        <div class="bg-medical-600 px-4 py-3 flex justify-between items-center">
+                            <span class="text-white font-medium text-sm">智守护 APP</span>
+                            <i class="fa-solid fa-battery-full text-white/80 text-xs"></i>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                                    <!-- Avatar Placeholder -->
+                                    <div class="w-full h-full bg-medical-100 flex items-center justify-center text-medical-600 font-bold">
+                                        老张
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">健康周报</h4>
+                                    <p class="text-xs text-gray-500">刚刚生成</p>
+                                </div>
+                                <span class="ml-auto px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded">健康</span>
+                            </div>
+
+                            <!-- Dynamic Analysis Text -->
+                            <div class="bg-gray-50 rounded-lg p-3 mb-3 border-l-4 border-medical-500">
+                                <p class="text-sm text-gray-700 leading-relaxed">
+                                    <i class="fa-solid fa-stethoscope text-medical-500 mr-1"></i>
+                                    <span id="ai-analysis-text">分析中...</span>
+                                </p>
+                            </div>
+
+                            <!-- Critical Thinking Prompt -->
+                            <div class="bg-orange-50 rounded-lg p-3 border border-orange-100">
+                                <h5 class="text-xs font-bold text-orange-700 mb-1 flex items-center">
+                                    <i class="fa-solid fa-lightbulb mr-1"></i> 健康思维训练
+                                </h5>
+                                <p class="text-xs text-gray-600 leading-relaxed" id="critical-thinking-text">
+                                    加载思维挑战...
+                                </p>
+                                <button class="mt-2 w-full py-1.5 bg-white border border-orange-200 text-orange-600 text-xs rounded shadow-sm hover:bg-orange-50">
+                                    查看详细解读
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-20 bg-healing-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Feature 1 -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-300">
+                <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-microchip text-xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">高精度硬件</h3>
+                <p class="text-gray-600 text-sm">PPG光电传感、高精度红外测温与加速度计融合，确保数据精准采集。</p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-300">
+                <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-brain text-xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">AI 知识图谱</h3>
+                <p class="text-gray-600 text-sm">基于LangChain与权威医疗指南（卫健委资料），提供千人千面的健康解读。</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-300">
+                <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-puzzle-piece text-xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">批判性思维</h3>
+                <p class="text-gray-600 text-sm">独创“谣言辨析”互动模块，引导用户通过数据反思，提升健康素养。</p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-300">
+                <div class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-shield-halved text-xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">隐私安全</h3>
+                <p class="text-gray-600 text-sm">端到端加密、本地化数据处理优先，让老年人安心使用的健康管家。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Project -->
+<section id="about" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">为什么发起这个项目？</h2>
+                <div class="space-y-4">
+                    <p class="text-gray-600 leading-relaxed">
+                        <strong class="text-gray-900">痛点：</strong> 现有健康设备仅提供冰冷的数字，老年人看不懂，且极易受到网络健康谣言的误导。
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        <strong class="text-gray-900">愿景：</strong> 我们希望突破传统设备“只测不管”的局限。通过 <span
+                            class="text-medical-600 font-semibold">“数据-知识-思维”</span>
+                        的闭环，不仅告诉用户“身体怎么样”，更教会用户“如何科学看待健康信息”。
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        <strong class="text-gray-900">技术路线：</strong> 采用ESP32/STM32作为主控，结合自研AI推理模型，打造软硬结合的适老化产品。
+                    </p>
+                </div>
+
+                <div class="mt-8 grid grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-medical-600">2025-2026</div>
+                        <div class="text-sm text-gray-500">项目周期</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-medical-600">BUPT</div>
+                        <div class="text-sm text-gray-500">信息与通信工程学院</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10 lg:mt-0 relative">
+                <div class="absolute inset-0 bg-medical-200 rounded-3xl transform rotate-3 opacity-30"></div>
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                     alt="老年人使用智能设备"
+                     class="relative rounded-3xl shadow-xl w-full h-auto object-cover transform -rotate-3 hover:rotate-0 transition duration-500">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section id="team" class="py-20 bg-healing-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-900">雏雁计划团队</h2>
+            <p class="mt-4 text-gray-600">信息与通信工程学院 & 计算机学院 跨学科联合</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Leader -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition duration-300 group">
+                <div class="h-24 bg-medical-500 relative">
+                    <div class="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
+                        <div class="w-20 h-20 rounded-full border-4 border-white bg-gray-100 flex items-center justify-center text-2xl font-bold text-medical-600">
+                            马
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-12 pb-6 px-6 text-center">
+                    <h3 class="text-lg font-bold text-gray-900">马翾</h3>
+                    <p class="text-sm text-medical-600 mb-2">项目负责人 / AI推理</p>
+                    <p class="text-xs text-gray-500">负责AI模块连接、RAG检索增强生成及系统整合。</p>
+                </div>
+            </div>
+
+            <!-- Member 1 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition duration-300 group">
+                <div class="h-24 bg-blue-500 relative">
+                    <div class="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
+                        <div class="w-20 h-20 rounded-full border-4 border-white bg-gray-100 flex items-center justify-center text-2xl font-bold text-blue-600">
+                            张
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-12 pb-6 px-6 text-center">
+                    <h3 class="text-lg font-bold text-gray-900">张容嘉</h3>
+                    <p class="text-sm text-blue-600 mb-2">信通院 / 话术开发</p>
+                    <p class="text-xs text-gray-500">负责医疗术语“翻译”、批判性思维引导话术设计。</p>
+                </div>
+            </div>
+
+            <!-- Member 2 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition duration-300 group">
+                <div class="h-24 bg-indigo-500 relative">
+                    <div class="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
+                        <div class="w-20 h-20 rounded-full border-4 border-white bg-gray-100 flex items-center justify-center text-2xl font-bold text-indigo-600">
+                            李
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-12 pb-6 px-6 text-center">
+                    <h3 class="text-lg font-bold text-gray-900">李天睿</h3>
+                    <p class="text-sm text-indigo-600 mb-2">信通院 / 知识库</p>
+                    <p class="text-xs text-gray-500">负责医疗知识库搭建、向量数据库配置与检索。</p>
+                </div>
+            </div>
+
+            <!-- Member 3 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition duration-300 group">
+                <div class="h-24 bg-purple-500 relative">
+                    <div class="absolute -bottom-10 left-1/2 transform -translate-x-1/2">
+                        <div class="w-20 h-20 rounded-full border-4 border-white bg-gray-100 flex items-center justify-center text-2xl font-bold text-purple-600">
+                            何
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-12 pb-6 px-6 text-center">
+                    <h3 class="text-lg font-bold text-gray-900">何鑫钰</h3>
+                    <p class="text-sm text-purple-600 mb-2">计算机学院 / 知识库</p>
+                    <p class="text-xs text-gray-500">负责LangChain开发、PDF文档解析与嵌入处理。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <p class="text-gray-500 text-sm">
+                <span class="font-bold text-gray-700">指导教师：</span>陈星延 (智能工程与自动化学院)
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <h4 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-heart-pulse text-medical-500"></i> 智守护
+                </h4>
+                <p class="text-gray-400 text-sm">
+                    北京邮电大学大学生雏雁计划项目<br>
+                    关注老年人健康，从每一个数据开始。
+                </p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4">联系方式</h4>
+                <p class="text-gray-400 text-sm mb-2"><i class="fa-solid fa-envelope mr-2"></i> 2231294487@qq.com</p>
+                <p class="text-gray-400 text-sm"><i class="fa-solid fa-phone mr-2"></i> 15910877915</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4">友情链接</h4>
+                <ul class="text-gray-400 text-sm space-y-2">
+                    <li><a href="#" class="hover:text-white transition">北京邮电大学官网</a></li>
+                    <li><a href="#" class="hover:text-white transition">信息与通信工程学院</a></li>
+                    <li><a href="#" class="hover:text-white transition">卫健委健康指南</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+            <p>&copy; 2025 BUPT 适老化智能家庭健康监测仪项目组. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Interactive Script for Simulation -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const heartRateEl = document.getElementById('heart-rate');
+        const tempEl = document.getElementById('temperature');
+        const aiTextEl = document.getElementById('ai-analysis-text');
+        const thinkingTextEl = document.getElementById('critical-thinking-text');
+
+        // Simulate Data Fluctuation
+        setInterval(() => {
+            // Heart Rate: 70-80
+            const hr = Math.floor(Math.random() * (85 - 70 + 1) + 70);
+            heartRateEl.innerHTML = `${hr} <span class="text-xs font-normal text-gray-400">BPM</span>`;
+
+            // Temp: 36.3 - 36.8
+            const temp = (Math.random() * (36.8 - 36.3) + 36.3).toFixed(1);
+            tempEl.innerHTML = `${temp} <span class="text-xs font-normal text-gray-400">°C</span>`;
+
+        }, 2000);
+
+        // Simulate AI Analysis Cycle
+        const scenarios = [
+            {
+                analysis: "心率维持在75bpm左右，体温正常。对比上周数据，您的静息心率有所改善。",
+                thinking: "网上常说'心率越慢越长寿'，这一定对吗？其实过缓（低于60）可能意味着心脏传导问题。您的数值目前处于最佳区间。"
+            },
+            {
+                analysis: "监测到轻微体温波动（36.7°C），处于正常生理范围内。睡眠质量评分：良好。",
+                thinking: "听说'喝热水能治百病'？实际上体温调节主要靠出汗和血流。保持水分很重要，但不能替代药物治疗。"
+            },
+            {
+                analysis: "今日运动量较昨日增加，心肺负荷正常。建议继续保持适量散步。",
+                thinking: "所有'老人'都适合'万步走'吗？过量行走可能损伤膝盖。适合您的才是最好的，不要盲目跟风朋友圈打卡。"
+            }
+        ];
+
+        let index = 0;
+
+        function updateAI() {
+            // Typing effect could go here, but simple text switch for clarity
+            aiTextEl.style.opacity = 0;
+            thinkingTextEl.style.opacity = 0;
+
+            setTimeout(() => {
+                aiTextEl.innerText = scenarios[index].analysis;
+                thinkingTextEl.innerText = scenarios[index].thinking;
+
+                aiTextEl.style.opacity = 1;
+                thinkingTextEl.style.opacity = 1;
+
+                index = (index + 1) % scenarios.length;
+            }, 500); // Wait for fade out
+        }
+
+        setInterval(updateAI, 6000); // Change scenario every 6 seconds
+        updateAI(); // Initial run
+    });
+</script>
+</body>
+</html>
